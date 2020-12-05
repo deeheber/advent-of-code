@@ -2,7 +2,7 @@ const { promisify } = require('util');
 const fs = require('fs');
 const readFile = promisify(fs.readFile);
 
-async function main () {
+(async function () {
   try {
     const rawInput = await readFile('input.txt', 'utf-8');
     const expenses = rawInput.split('\n');
@@ -22,9 +22,8 @@ async function main () {
     }
 
     console.log(`Answer is ${answer}`);
+    // 888331
   } catch (err) {
     console.error(err.message);
   }
-}
-
-main();
+})();
