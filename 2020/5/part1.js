@@ -4,7 +4,7 @@ const readFile = promisify(fs.readFile);
 
 (async function () {
   try {
-    const rawInput = await readFile('input', 'utf-8');
+    const rawInput = await readFile('input.txt', 'utf-8');
     const boardingPasses = rawInput.split('\n');
     const seats = [];
     
