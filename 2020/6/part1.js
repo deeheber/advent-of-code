@@ -9,18 +9,16 @@ const readFile = promisify(fs.readFile);
     let answer = 0;
 
     for (const group of groups) {
-      const yesAnswers = [];
+      const yesAnswers = new Set();
       const people = group.split('\n');
 
       for (const person of people) {
         for (const answer of person) {
-          if (yesAnswers.indexOf(answer) === -1) {
-            yesAnswers.push(answer);
-          }
+          yesAnswers.add(answer);
         }
       }
 
-      answer += yesAnswers.length;
+      answer += yesAnswers.size;
     }
 
     console.log(`Answer is ${answer}`);
