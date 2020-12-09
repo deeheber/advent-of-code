@@ -6,72 +6,78 @@ const readFile = promisify(fs.readFile);
   try {
     const rawInput = await readFile('input.txt', 'utf-8');
     const steps = rawInput.split('\n');
-    let accumulator;
 
     for (let i = 0; i < steps.length; i++)  {
       const action = steps[i].slice(0, 3);
 
       if (action !== 'acc') {
         // nop or jmp
-        const reachedEnd = await runProgram(action, i);
+        const accumulator = await runProgram(action, i, steps);
 
-        if (reachedEnd) {
-          break;
+        if (accumulator) {
+          console.log(`Answer is ${accumulator}`);
+          // 1375
+          return;
         }
       }
     }
-
-    async function runProgram (originalAction, originalIndex) {
-      const stepsClone = [...steps];
-      // swap the value
-      if (originalAction === 'nop') {
-        // switch to jmp
-        stepsClone[originalIndex] = `jmp ${steps[originalIndex].slice(4)}`;
-      } else {
-        // switch to nop
-        stepsClone[originalIndex] = `nop ${steps[originalIndex].slice(4)}`;
-      }
-
-      accumulator = 0;
-      let currentIndex = 0;
-
-      // the current item hasn't been visited or we're at the end
-      while (currentIndex < stepsClone.length && !stepsClone[currentIndex].startsWith('***')) {
-        const item = stepsClone[currentIndex];
-        const action = item.slice(0, 3);
-        const direction = item[4];
-        const amount = Number(item.slice(5));
-
-        if (action === 'acc') {
-          direction === '-'
-            ? accumulator -= amount
-            : accumulator += amount;
-
-            stepsClone[currentIndex] = item.replace('acc', '***');
-          currentIndex++;
-        } else if (action === 'jmp') {
-          stepsClone[currentIndex] = item.replace('jmp', '***');;
-
-          currentIndex = direction === '-'
-            ? currentIndex -= amount
-            : currentIndex += amount;
-        } else {
-          // assuming nop
-          stepsClone[currentIndex] = item.replace('nop', '***');
-          currentIndex++;
-        }
-      }
-
-      if (currentIndex >= stepsClone.length) {
-        return true;
-      }
-
-      return false;
-    }
-
-    console.log(`Answer is ${accumulator}`);
-    // 1375
   } catch (err) {
     console.error(err.message);
   }
 })();
+
+async function runProgram (originalAction, originalIndex, steps) {
+  let accumulator = 0;
+  let currentIndex = 0;
+  let visited = new Set();
+
+  // swap the value
+  if (originalAction === 'nop') {
+    // switch to jmp
+    steps[originalIndex] = `jmp ${steps[originalIndex].slice(4)}`;
+  } else {
+    // switch to nop
+    steps[originalIndex] = `nop ${steps[originalIndex].slice(4)}`;
+  }
+
+  while (currentIndex < steps.length) {
+    const item = steps[currentIndex];
+    const action = item.slice(0, 3);
+    const direction = item[4];
+    const amount = Number(item.slice(5));
+
+    if (visited.has(currentIndex)) {
+      // put values back to try another combo
+      if (originalAction === 'nop') {
+        steps[originalIndex] = `nop ${steps[originalIndex].slice(4)}`;
+      } else {
+        steps[originalIndex] = `jmp ${steps[originalIndex].slice(4)}`;
+      }
+
+      // this is an infinite loop
+      return false;
+    }
+
+    if (action === 'acc') {
+      direction === '-'
+        ? accumulator -= amount
+        : accumulator += amount;
+
+      visited.add(currentIndex);
+      currentIndex++;
+    } else if (action === 'jmp') {
+      visited.add(currentIndex);
+
+      currentIndex = direction === '-'
+        ? currentIndex -= amount
+        : currentIndex += amount;
+    } else {
+      // assuming nop
+      visited.add(currentIndex);
+      currentIndex++;
+    }
+  }
+
+  // reached the end
+  return accumulator;
+}
