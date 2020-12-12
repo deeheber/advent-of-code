@@ -1,5 +1,3 @@
-// Note: I haven't completed today.
-// The sample set works, but the actual puzzle input does not
 const { promisify } = require('util');
 const fs = require('fs');
 const readFile = promisify(fs.readFile);
@@ -24,14 +22,14 @@ const readFile = promisify(fs.readFile);
         for (let y = 0; y < original[0].length; y++) {
           const current = original[x][y];
           const up = x - 1 >= 0 ? original[x - 1][y] : '';
-          const down = x + 1 < original[0].length ? original[x + 1][y] : '';
+          const down = x + 1 < original.length ? original[x + 1][y] : '';
           const left = y - 1 >= 0 ? original[x][y - 1] : '';
-          const right = y + 1 < original.length ? original[x][y + 1] : '';
+          const right = y + 1 < original[0].length ? original[x][y + 1] : '';
           const upLeft = x - 1 >= 0 && y - 1 >= 0 ? original[x - 1][y - 1] : '';
-          const upRight = x - 1 >= 0 && y + 1 < original.length ? original[x - 1][y + 1] : '';
-          const downLeft = x + 1 < original[0].length && y - 1 >= 0 ? original[x + 1][y - 1] : '';
-          const downRight = x + 1 < original[0].length && y + 1 < original.length ? original[x + 1][y + 1] : '';
-          const adjacent = up  + down + left + right + upLeft + upRight + downLeft + downRight;
+          const upRight = x - 1 >= 0 && y + 1 < original[0].length ? original[x - 1][y + 1] : '';
+          const downLeft = x + 1 < original.length && y - 1 >= 0 ? original[x + 1][y - 1] : '';
+          const downRight = x + 1 < original.length && y + 1 < original[0].length ? original[x + 1][y + 1] : '';
+          const adjacent = up + down + left + right + upLeft + upRight + downLeft + downRight;
 
           // floor doesn't change
           if (current === FLOOR) {
@@ -65,9 +63,9 @@ const readFile = promisify(fs.readFile);
         }
       }
     }
-    console.log(copy)
+
     console.log(`Answer is ${answer}`);
-    // 2462 is too high
+    // 2386
   } catch (err) {
     console.error(err.message);
   }
