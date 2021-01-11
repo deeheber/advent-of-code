@@ -33,31 +33,25 @@ main();
 
 function getDistance (path1, path2) {
   let distance = null;
+  const intersections = new Set([...path1].filter(x => path2.has(x)));
+  // same starting position is a given, so this doesn't count
+  intersections.delete('0#0');
 
-  for (let i = 1; i < path1.length; i++) {
-    const x1 = path1[i][0];
-    const y1 = path1[i][1];
+  for (const intersection of intersections.keys()) {
+    const [ x, y ] = intersection.split('#').map(x => Number(x));
 
-    for (let j = 1; j < path2.length; j++) {
-      const x2 = path2[j][0];
-      const y2 = path2[j][1];
-
-      // Get where the two lines intersect
-      if (x1 === x2 && y1 === y2) {
-        const currentDistance = Math.abs(x1) + Math.abs(y1);
-
-        if (distance === null || currentDistance < distance) {
-          distance = currentDistance;
-        }
-      }
+    const currentDistance = Math.abs(x) + Math.abs(y);
+    if (distance === null || currentDistance < distance) {
+      distance = currentDistance;
     }
   }
 
   console.log('final distance ', distance);
+  // 1017
 }
 
 function getWireCordinates (wire) {
-  const coordinates = [];
+  const coordinates = new Set();
   let x = 0;
   let y = 0;
 
@@ -68,7 +62,8 @@ function getWireCordinates (wire) {
     if (direction === 'L') {
     // x subtract
       for (let counter = 0; counter <= distance; counter++) {
-        coordinates.push([x - counter, y]);
+        const key = `${x - counter}#${y}`
+        coordinates.add(key);
       }
       x -= distance;
     }
@@ -76,7 +71,8 @@ function getWireCordinates (wire) {
     if (direction === 'R') {
       // x add
       for (let counter = 0; counter <= distance; counter++) {
-        coordinates.push([x + counter, y]);
+        const key = `${x + counter}#${y}`;
+        coordinates.add(key);
       }
       x += distance;
     }
@@ -84,7 +80,8 @@ function getWireCordinates (wire) {
     if (direction === 'U') {
       // y add
       for (let counter = 0; counter <= distance; counter++) {
-        coordinates.push([x, y + counter]);
+        const key = `${x}#${y + counter}`;
+        coordinates.add(key);
       }
       y += distance;
     }
@@ -92,7 +89,8 @@ function getWireCordinates (wire) {
     if (direction === 'D') {
     // y subtract
       for (let counter = 0; counter <= distance; counter++) {
-        coordinates.push([x, y - counter]);
+        const key = `${x}#${y - counter}`;
+        coordinates.add(key);
       }
       y -= distance;
     }
