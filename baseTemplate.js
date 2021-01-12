@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+const fs = require('fs');
 
 const rawInput = fs.readFileSync('input.txt', 'utf-8');
 const input = rawInput.split('\n');
