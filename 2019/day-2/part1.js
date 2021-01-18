@@ -1,44 +1,30 @@
-const { promisify } = require('util');
 const fs = require('fs');
-const readFilePromise = promisify(fs.readFile);
 
-async function main () {
-  try {
-    const document = await readFilePromise('input.txt', 'utf-8');
-    const values = document.split(',').map(number => Number(number));
+const rawInput = fs.readFileSync('input.txt', 'utf-8');
+const input = rawInput.split(',').map(num => Number(num));
 
-    // Changes specified by the puzzle
-    values[1] = 12;
-    values[2] = 2;
+input[1] = 12;
+input[2] = 2;
 
-    let startIndex = 0;
-    let endIndex = 3;
+for (let i = 0; i < input.length; i += 4) {
+  const opicode = input[i];
+  const input1 = input[i + 1];
+  const input2 = input[i + 2];
+  const ouptputIndex = input[i + 3];
+  let result;
 
-    while (values[endIndex] !== undefined && values[startIndex] !== 99) {
-      const opicode = values[startIndex];
-      const val1Index = values[startIndex + 1];
-      const val2Index = values[startIndex + 2];
-      let result;
-
-      if (opicode === 1) {
-        result = values[val1Index] + values[val2Index];
-      } else if (opicode === 2) {
-        result = values[val1Index] * values[val2Index];
-      } else {
-        throw new Error(`Invalid opicode value: ${opicode}`);
-      }
-
-      const outputIndex = values[endIndex];
-      values[outputIndex] = result;
-
-      // Move to new position
-      startIndex += 4;
-      endIndex += 4;
-    }
-    console.log(`Final result: ${values}`);
-  } catch (err) {
-    console.error(err.message);
+  if (opicode === 1) {
+    result = input[input1] + input[input2];
+  } else if (opicode === 2) {
+    result = input[input1] * input[input2];
+  } else if (opicode === 99) {
+    break;
+  } else {
+    throw new Error(`Invalid opicode: ${opicode}`);
   }
+
+  input[ouptputIndex] = result;
 }
 
-main();
+console.log(`Answer is ${input[0]}`);
+// 3765464
