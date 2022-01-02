@@ -46,14 +46,3 @@ try {
 } catch (err) {
   console.error(`There was an error: ${err}`);
 }
-
-// Loop through each line
-  // Loop through each char on the line
-  // Init a queue
-    // If opener > push on queue
-    // If closer > pop first item off end of q
-      // If it doesn't match -> count and break to next line
-      // i.e. counter = { char: count }
-// Loop through counter
-  // multiply the num of ocurrences by pts
-  // Add up all the values
