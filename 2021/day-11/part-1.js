@@ -11,9 +11,7 @@ try {
   let flashCount = 0;
   let step = 1;
 
-  while (step < 4) {
-    console.log(`after STEP ${step - 1} -----------`)
-    console.log(levels);
+  while (step < 101) {
     // [[x,y], [x,y] ...]
     let flashCoords = [];
 
@@ -32,23 +30,102 @@ try {
       }
     }
 
-    // console.log(flashCoords);
-    // TODO after step 2
-    // Loop through flashCoords
-      // init a queue
-      // add current coords neighbors (8 at most) to the queue
-      // while there's items in the queue
-        // pull from the front q.shift()
-          // if it hasn't been flashed yet (value !== 0)
-            // inc the value by 1
-            // if new value after inc > 9
-              // flashCount++
-              // add neighbors (8 at most) to the queue
+    function getNeighbors([row, col]) {
+      /**
+       * [row][col]
+       * 
+       * up > [row - 1][col]
+       * upLeft > [row - 1 ][col - 1]
+       * upRight > [row - 1][col + 1]
+       * left > [row][col - 1]
+       * right > [row][col + 1]
+       * down > [row + 1][col]
+       * downLeft > [row + 1][col - 1]
+       * downRight > [row + 1][col + 1]
+       */
+
+      let neighbors = [];
+
+      function isOnGrid(val) {
+        // 10 x 10 grid
+        // Must be between 0 and 9
+        return val >= 0 && val < 10;
+      }
+
+      // up
+      if (isOnGrid(row - 1)) {
+        neighbors.push([row - 1, col]);
+      }
+
+      // upLeft
+      if (isOnGrid(row - 1) && isOnGrid(col - 1)) {
+        neighbors.push([row - 1, col - 1]);
+      }
+
+      // upRight
+      if (isOnGrid(row - 1) && isOnGrid(col + 1)) {
+        neighbors.push([row - 1, col + 1]);
+      }
+
+      // left
+      if (isOnGrid(col - 1)) {
+        neighbors.push([row, col - 1]);
+      }
+
+      // right
+      if (isOnGrid(col + 1)) {
+        neighbors.push([row, col + 1]);
+      }
+
+      // down
+      if (isOnGrid(row + 1)) {
+        neighbors.push([row + 1, col]);
+      }
+
+      // downLeft
+      if (isOnGrid(row + 1) && isOnGrid(col - 1)) {
+        neighbors.push([row + 1, col - 1]);
+      }
+
+      // downRight
+      if (isOnGrid(row + 1) && isOnGrid(col + 1)) {
+        neighbors.push([row + 1, col + 1]);
+      }
+
+      // [[1,2], [3,4]...];
+      return neighbors;
+    }
+
+    for (const coords of flashCoords) {
+      const neighbors = getNeighbors(coords);
+      let q = [...neighbors];
+
+      while (q.length) {
+        const [x, y] = q.shift();
+
+        if (levels[x][y] !== 0) {
+          // It hasn't been flashed yet => inc value by 1
+          // Can only be flashed once per step
+          const inc = levels[x][y] + 1;
+          levels[x][y] = inc;
+
+          if (inc > 9) {
+            // The octopus flashes
+            flashCount += 1;
+            levels[x][y] = 0;
+            // Add neighbors of current flashed octopus to the queue
+            const flashedNeighbors = getNeighbors([x, y]);
+            flashedNeighbors.forEach(n => q.push(n));
+          }
+        }
+      }
+    }
+
     step++;
   }
 
-  // console.log(`Flash count ${flashCount}`);
-  // console.log(levels)
+  console.log(`Flash count ${flashCount}`);
+  // 1688
 } catch (err) {
   console.error(`There was an error: ${err}`);
 }
