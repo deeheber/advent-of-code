@@ -22,15 +22,15 @@ try {
 
   // Find the corrupted lines
   for (const line of lines) {
-    let q = [];
+    let stack = [];
 
     for (let i = 0; i < line.length; i++) {
       const current = line[i];
 
       if (isOpener(current)) {
-        q.push(current);
+        stack.push(current);
       } else {
-        const top = q.pop();
+        const top = stack.pop();
 
         if (matches[current] !== top) {
           // Corrupted line

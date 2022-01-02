@@ -28,15 +28,15 @@ try {
 
   for (const line of lines) {
     let isCorrupted = false;
-    let q = [];
+    let stack = [];
 
     for (let i = 0; i < line.length; i++) {
       const current = line[i];
 
       if (isOpener(current)) {
-        q.push(current);
+        stack.push(current);
       } else {
-        const top = q.pop();
+        const top = stack.pop();
 
         if (openerMatch[current] !== top) {
           // Corrupted line
@@ -50,8 +50,8 @@ try {
     if (!isCorrupted) {
       const completion = [];
 
-      while (q.length) {
-        const top = q.pop();
+      while (stack.length) {
+        const top = stack.pop();
         completion.push(closerMatch[top]);
       }
 
