@@ -39,12 +39,6 @@ try {
     }
   };
 
-  const outcomeScore = {
-    win: 6,
-    lose: 0,
-    draw: 3
-  };
-
   let myScore = 0;
 
   for (const round of rounds) {
