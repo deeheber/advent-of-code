@@ -1,10 +1,10 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'fs/promises'
 
 try {
   // Parse input
-  const rawInputs = await readFile('day-02/input.txt', 'utf-8');
-  const inputs = rawInputs.split('\n');
-  const rounds = [];
+  const rawInputs = await readFile('day-02/input.txt', 'utf-8')
+  const inputs = rawInputs.split('\n')
+  const rounds = []
   for (const input of inputs) {
     // [ 'oponnent', 'me' ]
     rounds.push(input.split(' '))
@@ -37,30 +37,30 @@ try {
       // scissors
       tie: 'C'
     }
-  };
+  }
 
-  let myScore = 0;
+  let myScore = 0
 
   for (const round of rounds) {
-    const [ opponentChoice, myChoice ] = round;
+    const [opponentChoice, myChoice] = round
 
     if (choices[myChoice].tie === opponentChoice) {
       // tie
-      myScore += 3;
+      myScore += 3
     } else {
-      const neededToWin = choices[myChoice].win;
+      const neededToWin = choices[myChoice].win
 
       if (neededToWin === opponentChoice) {
         // win
-        myScore += 6;
+        myScore += 6
       }
     }
 
-    myScore += choices[myChoice].itemScore;
+    myScore += choices[myChoice].itemScore
   }
 
   // 14827
   console.log(`Answer is ${myScore}`)
 } catch (err) {
-  console.error(`There was an error: ${err}`);
+  console.error(`There was an error: ${err}`)
 }

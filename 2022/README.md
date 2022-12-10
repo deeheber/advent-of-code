@@ -8,3 +8,5 @@ To run a solution navigate to the 2022 directory run either of the following com
 - `day={day number} part={part number} npm start`
 
 I ran the solutions using node 18.x, but it may work with other node versions.
+
+To use the prettier formatter run `npm run format` (after running `npm install`)
