@@ -1,0 +1,17 @@
+{
+  "name": "advent-of-code-2023",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node \"day-$day/part-$part.js\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deeheber/advent-of-code"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.8.1"
+  }
+}
