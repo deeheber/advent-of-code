@@ -12,3 +12,5 @@ I ran the solutions using node 20.x (see `.nvmrc`), but it may work with other n
 To use the prettier formatter run `npm run format` (after running `npm install`)
 
 I could've used TypeScript, but to me that felt like overkill for something like this. Decided to go with plain JS using modules instead.
+
+Prettier is on a downgraded version due to https://github.com/prettier/prettier-vscode/issues/3007
