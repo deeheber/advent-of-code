@@ -8,7 +8,6 @@ try {
   const right = []
 
   for (const item of items) {
-    // TODO adjust split size ???
     const [first, second] = item.split('   ')
     left.push(Number(first))
     right.push(Number(second))
