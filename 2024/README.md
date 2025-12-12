@@ -1,6 +1,6 @@
-# advent-of-code-2024
+# 🎄 advent-of-code-2024
 
-Challenges from https://adventofcode.com/2024
+Challenges from https://adventofcode.com/2024 🔔
 
 To run a solution navigate to the 2024 directory run either of the following commands:
 

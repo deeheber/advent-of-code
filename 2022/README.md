@@ -1,6 +1,6 @@
-# advent-of-code-2022
+# 🎄 advent-of-code-2022
 
-Challenges from https://adventofcode.com/2022
+Challenges from https://adventofcode.com/2022 🎁
 
 To run a solution navigate to the 2022 directory run either of the following commands:
 

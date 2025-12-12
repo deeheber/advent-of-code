@@ -1,6 +1,6 @@
-# advent-of-code-2019
+# 🎄 advent-of-code-2019
 
-Challenges from https://adventofcode.com/2019
+Challenges from https://adventofcode.com/2019 ⭐
 
 Quickstart to run a solution
 

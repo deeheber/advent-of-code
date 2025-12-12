@@ -1,6 +1,6 @@
-# advent-of-code-2025
+# 🎄 advent-of-code-2025
 
-Challenges from https://adventofcode.com/2025
+Challenges from https://adventofcode.com/2025 ✨
 
 To run a solution navigate to the 2025 directory run either of the following commands:
 

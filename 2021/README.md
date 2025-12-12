@@ -1,6 +1,6 @@
-# advent-of-code-2021
+# 🎄 advent-of-code-2021
 
-Challenges from https://adventofcode.com/2021
+Challenges from https://adventofcode.com/2021 🎅
 
 This year I'm experimenting with using ES modules year, specifically for the top level await feature.
 

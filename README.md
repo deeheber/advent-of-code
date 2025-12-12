@@ -1,12 +1,30 @@
-# advent-of-code
+# 🎄 Advent of Code Solutions
 
-Challenges from https://adventofcode.com/
+My solutions to the [Advent of Code](https://adventofcode.com/) programming puzzles 🎅
 
-Might not get to all challenges through the years
+This repository contains JavaScript solutions for various years of Advent of Code challenges. Each year is organized in its own folder with daily puzzle solutions.
 
-Note that I'm doing these challenges for fun and this does not necessarily reflect how I'd handle things in a production environment
+> **Note:** These solutions are written for fun and learning - they prioritize readability and experimentation over production-ready code.
 
-## Quick Setup
+## 🚀 Getting Started
+
+### Running Solutions
+
+Navigate to any year folder and run a solution:
+
+```bash
+cd 2024
+node day-01/part-1.js
+```
+
+For years with npm scripts (2021+):
+
+```bash
+cd 2024
+day=1 part=1 npm start
+```
+
+### 🎁 Creating New Solutions
 
 Use the `scaffold-day.sh` script to quickly set up a new day's challenge:
 
@@ -31,3 +49,24 @@ Use the `scaffold-day.sh` script to quickly set up a new day's challenge:
 - The script looks for `baseTemplate.js` in the target year folder
 - Day number must be between 1-25
 - Script will create the year folder if it doesn't exist
+
+## 📁 Repository Structure
+
+```
+advent-of-code/
+├── 2019/          # JavaScript solutions
+├── 2020/          # JavaScript solutions
+├── 2021/          # ES modules with top-level await
+├── 2022/          # ES modules + npm scripts + prettier
+├── 2023/          # ES modules + npm scripts + prettier
+├── 2024/          # ES modules + npm scripts + prettier
+├── 2025/          # Current year (ES modules + npm scripts + prettier)
+└── scaffold-day.sh # Script to create new day folders
+```
+
+Each year folder contains:
+
+- `day-XX/` folders with `part-1.js` and `part-2.js` solutions
+- `input.txt` files with puzzle inputs
+- `baseTemplate.js` for scaffolding new days
+- Year-specific README with setup instructions
