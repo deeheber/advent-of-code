@@ -23,7 +23,7 @@ For years with npm scripts (2021+):
 
 ```bash
 cd 2024
-day=1 part=1 npm start
+day=01 part=1 npm start
 ```
 
 ### 🎁 Creating New Solutions
