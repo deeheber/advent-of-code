@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node \"day-$day/part-$part.js\"",
+    "start": "node run.js $day $part",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "repository": {
