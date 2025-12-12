@@ -6,6 +6,8 @@ This repository contains JavaScript solutions for various years of Advent of Cod
 
 > **Note:** These solutions are written for fun and learning - they prioritize readability and experimentation over production-ready code.
 
+> **🧠 Human-Crafted Solutions:** All puzzles were solved using pure problem-solving skills and vanilla JavaScript knowledge - no AI assistance was used in developing these solutions.
+
 ## 🚀 Getting Started
 
 ### Running Solutions
