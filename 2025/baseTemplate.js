@@ -8,6 +8,8 @@ try {
   for (const item of items) {
     console.log(item)
   }
+
+  // Solution code here
 } catch (err) {
   console.error(`There was an error: ${err}`)
 }
