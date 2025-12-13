@@ -11,5 +11,5 @@ try {
 
   // Solution code here
 } catch (err) {
-  console.error(`There was an error: ${err}`)
+  console.error(`There was an error: ${err.stack}`)
 }
